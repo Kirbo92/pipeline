@@ -15,6 +15,8 @@
 package amazon
 
 import (
+	"errors"
+
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/banzaicloud/pipeline/internal/network"
 	"github.com/banzaicloud/pipeline/secret"
@@ -113,6 +115,14 @@ func (ns *amazonNetworkService) ListNetworks() ([]network.Network, error) {
 	return networks, nil
 }
 
+func (ns *amazonNetworkService) CreateNetwork(networkName string, location string, cidrs []string, tags map[string]string) (network.Network, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *amazonNetworkService) DeleteNetwork(networkName string) error {
+	return errors.New("not implemented")
+}
+
 func (ns *amazonNetworkService) ListSubnets(networkID string) ([]network.Subnet, error) {
 	res, err := ns.client.DescribeSubnets(&ec2.DescribeSubnetsInput{
 		Filters: []*ec2.Filter{
@@ -132,6 +142,14 @@ func (ns *amazonNetworkService) ListSubnets(networkID string) ([]network.Subnet,
 		}
 	}
 	return subnets, nil
+}
+
+func (ns *amazonNetworkService) CreateSubnet(networkName, subnetName string, cidrs []string) (network.Subnet, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *amazonNetworkService) DeleteSubnet(networkName, subnetName string) error {
+	return errors.New("not implemented")
 }
 
 func (ns *amazonNetworkService) ListRouteTables(networkID string) ([]network.RouteTable, error) {

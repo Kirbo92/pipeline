@@ -15,6 +15,7 @@
 package google
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -127,6 +128,14 @@ func (ns *googleNetworkService) ListNetworks() ([]network.Network, error) {
 	return networks, nil
 }
 
+func (ns *googleNetworkService) CreateNetwork(networkName string, location string, cidrs []string, tags map[string]string) (network.Network, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *googleNetworkService) DeleteNetwork(networkName string) error {
+	return errors.New("not implemented")
+}
+
 // ListSubnets returns VPC subnetworks of the organization in the specified VPC network at Google
 func (ns *googleNetworkService) ListSubnets(networkID string) ([]network.Subnet, error) {
 	projectID := ns.serviceAccount.ProjectId
@@ -148,6 +157,14 @@ func (ns *googleNetworkService) ListSubnets(networkID string) ([]network.Subnet,
 		})
 	}
 	return subnets, nil
+}
+
+func (ns *googleNetworkService) CreateSubnet(networkName, subnetName string, cidrs []string) (network.Subnet, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *googleNetworkService) DeleteSubnet(networkName, subnetName string) error {
+	return errors.New("not implemented")
 }
 
 // ListRouteTables returns the VPC route tables of the organization in the specified VPC network at Google

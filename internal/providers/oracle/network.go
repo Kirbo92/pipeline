@@ -15,6 +15,8 @@
 package oracle
 
 import (
+	"errors"
+
 	"github.com/banzaicloud/pipeline/internal/network"
 	"github.com/banzaicloud/pipeline/pkg/providers/oracle/oci"
 	secretOracle "github.com/banzaicloud/pipeline/pkg/providers/oracle/secret"
@@ -119,6 +121,14 @@ func (ns *oracleNetworkService) ListNetworks() ([]network.Network, error) {
 	return networks, nil
 }
 
+func (ns *oracleNetworkService) CreateNetwork(networkName string, location string, cidrs []string, tags map[string]string) (network.Network, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *oracleNetworkService) DeleteNetwork(networkName string) error {
+	return errors.New("not implemented")
+}
+
 // ListSubnets returns VCN subnetworks
 func (ns *oracleNetworkService) ListSubnets(networkID string) ([]network.Subnet, error) {
 	sns, err := ns.client.GetSubnets(&networkID)
@@ -135,6 +145,14 @@ func (ns *oracleNetworkService) ListSubnets(networkID string) ([]network.Subnet,
 		}
 	}
 	return subnets, nil
+}
+
+func (ns *oracleNetworkService) CreateSubnet(networkName, subnetName string, cidrs []string) (network.Subnet, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *oracleNetworkService) DeleteSubnet(networkName, subnetName string) error {
+	return errors.New("not implemented")
 }
 
 // ListRouteTables returns VCN route tables

@@ -15,6 +15,7 @@
 package alibaba
 
 import (
+	"errors"
 	"time"
 
 	"github.com/goph/emperror"
@@ -122,6 +123,14 @@ func (ns *alibabaNetworkService) ListNetworks() ([]network.Network, error) {
 	return networks, nil
 }
 
+func (ns *alibabaNetworkService) CreateNetwork(networkName string, location string, cidrs []string, tags map[string]string) (network.Network, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *alibabaNetworkService) DeleteNetwork(networkName string) error {
+	return errors.New("not implemented")
+}
+
 // ListSubnets returns VPC subnetworks
 func (ns *alibabaNetworkService) ListSubnets(networkID string) ([]network.Subnet, error) {
 	req := vpc.CreateDescribeVSwitchesRequest()
@@ -140,6 +149,14 @@ func (ns *alibabaNetworkService) ListSubnets(networkID string) ([]network.Subnet
 		}
 	}
 	return subnets, nil
+}
+
+func (ns *alibabaNetworkService) CreateSubnet(networkName, subnetName string, cidrs []string) (network.Subnet, error) {
+	return nil, errors.New("not implemented")
+}
+
+func (ns *alibabaNetworkService) DeleteSubnet(networkName, subnetName string) error {
+	return errors.New("not implemented")
 }
 
 // ListRouteTables returns the VPC route tables

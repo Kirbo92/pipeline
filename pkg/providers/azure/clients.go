@@ -219,6 +219,20 @@ func (cc *CloudConnection) GetSubnetsClient() *SubnetsClient {
 	}
 }
 
+// LoabBalancersClient extends network.LoadBalancersClient
+type LoabBalancersClient struct {
+	network.LoadBalancersClient
+}
+
+// GetLoabBalancersClient returns a LoabBalancersClient instance
+func (cc *CloudConnection) GetLoabBalancersClient() *LoabBalancersClient {
+	return &LoabBalancersClient{
+		network.LoadBalancersClient{
+			BaseClient: *cc.getNetworkBaseClient(),
+		},
+	}
+}
+
 // SubscriptionsClient extends subscriptions.Client
 type SubscriptionsClient struct {
 	subscriptions.Client
@@ -247,6 +261,20 @@ func (cc *CloudConnection) GetVirtualMachinesClient() *VirtualMachinesClient {
 	}
 }
 
+
+// VirtualMachineScaleSetsClient extends compute.VirtualMachinesClient
+type VirtualMachineScaleSetsClient struct {
+	compute.VirtualMachineScaleSetsClient
+}
+
+func (cc *CloudConnection) GetVirtualMachineScaleSetsClient() *VirtualMachineScaleSetsClient {
+	return &VirtualMachineScaleSetsClient{
+		compute.VirtualMachineScaleSetsClient{
+			BaseClient: *cc.getComputeBaseClient(),
+		},
+	}
+}
+
 // VirtualMachineSizesClient extends compute.VirtualMachineSizesClient
 type VirtualMachineSizesClient struct {
 	compute.VirtualMachineSizesClient
@@ -270,6 +298,20 @@ type VirtualNetworksClient struct {
 func (cc *CloudConnection) GetVirtualNetworksClient() *VirtualNetworksClient {
 	return &VirtualNetworksClient{
 		network.VirtualNetworksClient{
+			BaseClient: *cc.getNetworkBaseClient(),
+		},
+	}
+}
+
+// SecurityGroupsClient extends network.SecurityGroupsClient
+type SecurityGroupsClient struct {
+	network.SecurityGroupsClient
+}
+
+// GetSecurityGroupsClient returns a SecurityGroupsClient instance
+func (cc *CloudConnection) GetSecurityGroupsClient() *SecurityGroupsClient {
+	return &SecurityGroupsClient{
+		network.SecurityGroupsClient{
 			BaseClient: *cc.getNetworkBaseClient(),
 		},
 	}

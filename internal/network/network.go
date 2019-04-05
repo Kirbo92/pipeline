@@ -35,9 +35,28 @@ type RouteTable interface {
 	Name() string
 }
 
+// AzureNetworkSecurityRule describes rule of a security group
+type AzureNetworkSecurityRule struct {
+	Name                 string
+	Source               string
+	SourcePortRange      string
+	Destination          string
+	DestinationPortRange string
+	Protocol             string // Tcp | Udp
+	Direction            string // Inbound | Outbound
+	Access               string // Allow | Deny
+	Priority             int32  // The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
+	Description          string
+}
+
 // Service defines the interface of provider specific network service implementations
 type Service interface {
 	ListNetworks() ([]Network, error)
+	CreateNetwork(networkName string, location string, cidrs []string, tags map[string]string) (Network, error)
+	DeleteNetwork(networkName string) error
+
 	ListRouteTables(networkID string) ([]RouteTable, error)
 	ListSubnets(networkID string) ([]Subnet, error)
+	CreateSubnet(networkName, name string, cidrs []string) (Subnet, error)
+	DeleteSubnet(networkName, subnetName string) error
 }
