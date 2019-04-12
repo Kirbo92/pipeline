@@ -17,8 +17,6 @@ commands:
                     name: Restore Go module cache
                     keys:
                         - gomod-v1-{{ .Branch }}-{{ checksum "go.sum" }}
-                        - gomod-v1-{{ .Branch }}
-                        - gomod-v1-master
     download_go_modules:
         description: Download go modules
         steps:
@@ -66,9 +64,6 @@ jobs:
                     name: Restore license cache
                     keys:
                         - licensei-v1-{{ .Branch }}-{{ checksum "go.sum" }}
-                        - licensei-v1-{{ .Branch }}
-                        - licensei-v1-master
-                        - licensei-v1
             -
                 run:
                     name: Download license information for dependencies
