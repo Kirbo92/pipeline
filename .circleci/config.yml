@@ -38,8 +38,13 @@ jobs:
         executor: go
         steps:
             - checkout
-            - restore_go_module_cache
-            - download_go_modules
+            #- restore_go_module_cache
+            #- download_go_modules
+            - run:
+                name: test
+                command: |
+                    mkdir -p /go/pkg/mod
+                    touch /go/pkg/mod/test
             -
                 save_cache:
                     name: Save Go module cache
@@ -238,7 +243,7 @@ workflows:
     ci:
         jobs:
             - build
-            - static-checks
-            - integration-tests
-            - unit-tests
-            - db-tests
+            #- static-checks
+            #- integration-tests
+            #- unit-tests
+            #- db-tests
