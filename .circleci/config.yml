@@ -16,7 +16,8 @@ commands:
                 restore_cache:
                     name: Restore Go module cache
                     keys:
-                        - gomod-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+                        - gomod-v1-{{ checksum "go.sum" }}-{{ .Branch }}
+                        - gomod-v1-{{ checksum "go.sum" }}
     download_go_modules:
         description: Download go modules
         steps:
@@ -42,7 +43,7 @@ jobs:
             -
                 save_cache:
                     name: Save Go module cache
-                    key: gomod-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+                    key: gomod-v1-{{ checksum "go.sum" }}-{{ .Branch }}
                     paths:
                         - /go/pkg/mod
             -
@@ -63,7 +64,8 @@ jobs:
                 restore_cache:
                     name: Restore license cache
                     keys:
-                        - licensei-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+                        - licensei-v1-{{ checksum "go.sum" }}-{{ .Branch }}
+                        - licensei-v1-{{ checksum "go.sum" }}
             -
                 run:
                     name: Download license information for dependencies
@@ -71,7 +73,7 @@ jobs:
             -
                 save_cache:
                     name: Save license cache
-                    key: licensei-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+                    key: licensei-v1-{{ checksum "go.sum" }}-{{ .Branch }}
                     paths:
                         - .licensei.cache
             -
